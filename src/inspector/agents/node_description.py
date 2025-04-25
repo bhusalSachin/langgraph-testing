@@ -38,6 +38,8 @@ input_variables=["graph_description", "input", "output", "node_name", "type", "f
 
 # nodes
 def generate_node_descriptions(state: OverallState):
+    print("\n")
+    print("----Generating node description----")
     structured_llm = create_structured_llm(Node_description)
 
     config, error, error_message  = invoke_graph(graph=state["compiled_graph"],
@@ -80,6 +82,10 @@ def generate_node_descriptions(state: OverallState):
 
         summary_graph.nodes[node_name]["description"] = llm_description.node_description
 
-    
+        print("\n")
+        print(f"Node description generated for {node_name}")
+
+    print("\n")
+    print("Node description generation completed successfully.")
     return {"execution_configs": [config],
             "summary_graph": summary_graph}

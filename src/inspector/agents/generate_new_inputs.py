@@ -28,6 +28,8 @@ input_variables=["test_case_name", "test_case_description", "graph_valid_input"]
 
 # Nodes
 def generate_new_inputs(state: SubGraphState):
+    print("\n")
+    print("Producing new inputs for testing..")
     structured_llm = create_structured_llm(Input)
 
     parameters = {"test_case_name": state["current_test_case"].name,
@@ -54,10 +56,13 @@ def generate_new_inputs(state: SubGraphState):
                                                          thread_id=new_input.test_case_id,
                                                          user_id=new_input.tester_id)
             new_input.is_successful = not error
+
+            print("New inputs been generated successfully.")
             
             return {"all_new_inputs": [new_input], 
                     "execution_configs": [config]}
         else:
+            print("New inputs couldn't be generated. FAILED.")
             raise ValueError(f"invalid input type for {new_input.new_input}")
 
     except Exception as e:

@@ -24,6 +24,8 @@ input_variables=["graph_description", "human_analyst_feedback", "max_analysts"])
 
 # Nodes
 def generate_testers(state: OverallState):
+    print("\n")
+    print("----Generating testers----")
     structured_llm = create_structured_llm(Testers)
     
     parameters = {"graph_description":state["user_description"],
@@ -35,6 +37,10 @@ def generate_testers(state: OverallState):
 
     nodes = [node_data for node_name, node_data in state["summary_graph"].nodes(data=True) if node_data.get("description", None)]
     testers = created_testers.testers
+
+    print("\n")
+    print("Testers created for the following nodes")
+    print(nodes)
     
     return {"testers": {tester.id: tester for tester in created_testers.testers},
             "node_and_tester": generate_pairs(nodes, testers),

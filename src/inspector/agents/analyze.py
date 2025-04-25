@@ -22,6 +22,8 @@ If the output is as expected, the comments should be a description of the behavi
 
 # Nodes
 def analize_results(state: OverallState):
+    print("\n")
+    print("---Analyzing the test----")
     structured_llm = create_structured_llm(FinalOutput)
 
     current_result_config = state["execution_configs"].pop(0)
@@ -48,6 +50,9 @@ def analize_results(state: OverallState):
     final_output = structured_llm.invoke([SystemMessage(content=system_message)]+[HumanMessage(content="Generate the final output.")])
     final_output.tester_id = tester.id
     final_output.test_case_id = current_test_case.id
+
+    print("\n")
+    print("Final test report have been generated successfully.")
 
     return {"listResults": [final_output]}
 

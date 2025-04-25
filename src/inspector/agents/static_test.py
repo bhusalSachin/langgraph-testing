@@ -5,6 +5,7 @@ from langgraph.prebuilt import ToolNode, tools_condition
 import networkx as nx
 
 def static_test(state: OverallState):
+    print("-----Runnig static test case----")
     memory = MemorySaver() # it could be a SQLite database
     graph_after_compile = state["graph_before_compile"].compile(checkpointer=memory)
 
@@ -27,6 +28,9 @@ def static_test(state: OverallState):
 
     for edge in edges:
         graph_sumary.add_edge(edge.source, edge.target, conditional=edge.conditional)
+    
+    print("\n")
+    print("Static test case completed.")
 
     return {"compiled_graph": graph_after_compile,
              "summary_graph": graph_sumary,

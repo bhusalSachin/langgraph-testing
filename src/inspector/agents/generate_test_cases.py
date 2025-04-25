@@ -67,14 +67,21 @@ def generate_test_cases(state: OverallState):
 
     for test_case in test_cases.test_cases:
         test_case.tester_id = current_tester.id
+    
+    print("\n")
+    print(f"Test case generated with id {current_tester.id}")
 
     return {"test_cases": test_cases.test_cases}
 
 # conditional edges
 def more_test_cases(state: OverallState):
+    print("\n")
+    print("----Generating test cases----")
     if state["node_and_tester"]:
         return "generate_test_cases"
     else:
+        print("\n")
+        print("----Executing test case--")
         routing = []
         valid_inpout = state["valid_input"]
         compiled_graph = state["compiled_graph"]
