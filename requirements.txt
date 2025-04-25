@@ -1,3 +1,7 @@
 langchain
 langgraph
 pydantic
+networkx
+jinja2
+langchain-openai
+python-dotenv
